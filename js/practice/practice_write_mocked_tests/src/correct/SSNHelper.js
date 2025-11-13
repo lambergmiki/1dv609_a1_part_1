@@ -2,6 +2,7 @@
 
 
 class SSNHelper {
+    
     isCorrectLength(stringInput) {
         return stringInput.length == 11; //YYMMDD-XXXX
     }
