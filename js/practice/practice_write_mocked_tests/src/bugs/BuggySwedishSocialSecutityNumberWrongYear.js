@@ -48,4 +48,4 @@ class SwedishSocialSecurityNumber {
     }
 }
 
-module.exports = SwedishSocialSecurityNumber;
+export { SwedishSocialSecurityNumber }
