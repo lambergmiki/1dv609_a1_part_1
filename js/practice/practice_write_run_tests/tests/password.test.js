@@ -55,14 +55,14 @@ describe("Password class, test suite", () => {
 	});
 
 	// BugVeryShort
-	test("constructor Should Thow Exception For Short Passwords", () => {
+	test("Constructor Should Thow Exception For Short Passwords", () => {
 		expect(() => {
 			new Password("abc1234");
 		}).toThrow("Too short password");
 	});
 
 	// BugWrongHashingAlgorithm - checks that hash number is >= 20 digits long
-	test("Hashing algortihm should produce a safe hash (>= 20 digits)", () => {
+	test("Hashing algorithm should produce a safe hash (>= 20 digits)", () => {
 		const pw = new Password("hashedPassword123");
 		const pw2 = new Password("hashedPassword123");
 

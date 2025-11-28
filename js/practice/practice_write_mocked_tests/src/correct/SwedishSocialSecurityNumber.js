@@ -1,52 +1,50 @@
-
-
-
 //Java Version 1 Correct Password
 class SwedishSocialSecurityNumber {
-    #helper;
-    #ssn;
-    
-    constructor(stringInput, helper) {
-        this.#helper = helper;
+	#helper;
+	#ssn;
 
-        const trimmedSS = stringInput.trim(); 
+	constructor(stringInput, helper) {
+		this.#helper = helper;
 
-        if (helper.isNotCorrectLength(trimmedSS)) {
-            throw new Error("To short, must be 11 characters");
-        }
-        if (helper.isCorrectFormat(trimmedSS) === false) {
-            throw new Error("Incorrect format, must be: YYMMDD-XXXX");
-        }
+		const trimmedSS = stringInput.trim();
 
-        this.#ssn = trimmedSS;
+		// Fixed, throws on false
+		if (!helper.isCorrectLength(trimmedSS)) {
+			throw new Error("Too short, must be 11 characters");
+		}
 
-        if (helper.isValidMonth(this.getMonth()) === false) {
-            throw new Error("Invalid month in SSN");
-        }
-        if (helper.isValidDay(this.getDay()) === false) {
-            throw new Error("Invalid month in SSN");
-        }
-        if (helper.luhnisCorrect(this.#ssn) === false) {
-            throw new Error("Invalid SSN according to Luhn's algorithm");
-        }
-    }
+		// Fixed, throws on false
+		if (!helper.isCorrectFormat(trimmedSS)) {
+			throw new Error("Incorrect format, must be: YYMMDD-XXXX");
+		}
 
-    getYear() {
-        return this.#ssn.substring(0, 2); //YYMMDD-XXXX
-    }
+		this.#ssn = trimmedSS;
 
-    getMonth() {
-        return this.#ssn.substring(2, 4); //YYMMDD-XXXX
-    }
+		if (helper.isValidMonth(this.getMonth()) === false) {
+			throw new Error("Invalid month in SSN");
+		}
+		if (helper.isValidDay(this.getDay()) === false) {
+			throw new Error("Invalid month in SSN");
+		}
+		if (helper.luhnisCorrect(this.#ssn) === false) {
+			throw new Error("Invalid SSN according to Luhn's algorithm");
+		}
+	}
+	getYear() {
+		return this.#ssn.substring(0, 2);
+	}
 
-    getDay() {
-        return this.#ssn.substring(4, 6); //YYMMDD-XXXX  0123456-8901
-    }
+	getMonth() {
+		return this.#ssn.substring(2, 4);
+	}
 
-    getSerialNumber() {
-        return this.#ssn.substring(7, 11); //YYMMDD-XXXX
-    }
+	getDay() {
+		return this.#ssn.substring(4, 6);
+	}
+
+	getSerialNumber() {
+		return this.#ssn.substring(7, 11);
+	}
 }
 
-// Export Password as main export for backward compatibility, and Helper as a property
-export { SwedishSocialSecurityNumber }
+export { SwedishSocialSecurityNumber };
