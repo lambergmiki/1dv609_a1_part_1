@@ -8,13 +8,10 @@ class SwedishSocialSecurityNumber {
 
 		const trimmedSS = stringInput.trim();
 
-		// Fixed, throws on false
-		if (!helper.isCorrectLength(trimmedSS)) {
-			throw new Error("Too short, must be 11 characters");
+		if (helper.isCorrectLength(trimmedSS) === false) {
+			throw new Error("To short, must be 11 characters");
 		}
-
-		// Fixed, throws on false
-		if (!helper.isCorrectFormat(trimmedSS)) {
+		if (helper.isCorrectFormat(trimmedSS) === false) {
 			throw new Error("Incorrect format, must be: YYMMDD-XXXX");
 		}
 
@@ -24,14 +21,15 @@ class SwedishSocialSecurityNumber {
 			throw new Error("Invalid month in SSN");
 		}
 		if (helper.isValidDay(this.getDay()) === false) {
-			throw new Error("Invalid month in SSN");
+			throw new Error("Invalid day in SSN");
 		}
 		if (helper.luhnisCorrect(this.#ssn) === false) {
 			throw new Error("Invalid SSN according to Luhn's algorithm");
 		}
 	}
+
 	getYear() {
-		return this.#ssn.substring(0, 2);
+		return this.#ssn.substring(0, 2); //YYMMDD-XXXX
 	}
 
 	getMonth() {

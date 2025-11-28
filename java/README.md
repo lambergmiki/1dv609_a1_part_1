@@ -53,11 +53,6 @@ Run all test suites:
 ./gradlew test
 ```
 
-Run tests for a specific practice task:
-```bash
-./gradlew :practice:practice_write_run_tests:test
-```
-
 Run tests with detailed output:
 ```bash
 ./gradlew test --info
@@ -66,6 +61,11 @@ Run tests with detailed output:
 Run a specific test class:
 ```bash
 ./gradlew test --tests PasswordTest
+```
+
+Run tests for a specific test in a test file:
+```bash
+./gradlew test --tests PasswordTest.shouldAlwaysPass
 ```
 
 ## Example Output

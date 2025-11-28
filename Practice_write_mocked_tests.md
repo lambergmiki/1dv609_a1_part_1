@@ -25,8 +25,8 @@ A mock is a configurable class instance that acts as a object of SSNHelper but w
 * Write a test suite for SwedishSecurityNumber class and another for the SSNHelper class
 A bug in the SwedishSecurityNumber must not fail due to a bug in SSNHelper. 
 * None of the tests in SwedishSecurityNumber should use instances of the SSNHelper class.
-    * Test the Helper and Password classes independently of each other
-        * Tests for Password should only fail if the bug is in Password class
+    * Test the Helper and SwedishSecurityNumber  classes independently of each other
+        * Tests for SwedishSecurityNumber  should only fail if the bug is in SwedishSecurityNumber  class
         * Tests for Helper should only fail if the bug is in Helper class
 * Only one expect/assert/verify per test unless motivated
 * Show tests and bug fail matrix as in previous task
@@ -40,7 +40,7 @@ A bug in the SwedishSecurityNumber must not fail due to a bug in SSNHelper.
   * A test suite for SSNHelper.
   * A test per buggy version.
   * A set of tests to make sure coverage is high
-  * An additional test
+    * An additional test
 
 
 ### Table for checking test suite bug coverage
