@@ -43,6 +43,10 @@ class SwedishSocialSecurityNumber {
 	getSerialNumber() {
 		return this.#ssn.substring(7, 11);
 	}
+
+	getSsn() {
+		return this.#ssn;
+	}
 }
 
 export { SwedishSocialSecurityNumber };
