@@ -6,16 +6,16 @@ class SwedishSocialSecurityNumber {
 	constructor(stringInput, helper) {
 		this.#helper = helper;
 
-		//const trimmedSS = stringInput.trim();
+		const trimmedSS = stringInput.trim();
 
-		if (helper.isCorrectLength(stringInput) == false) {
+		if (helper.isCorrectLength(trimmedSS) === false) {
 			throw new Error("To short, must be 11 characters");
 		}
-		if (helper.isCorrectFormat(stringInput) === false) {
+		if (helper.isCorrectFormat(trimmedSS) === false) {
 			throw new Error("Incorrect format, must be: YYMMDD-XXXX");
 		}
 
-		this.#ssn = stringInput;
+		this.#ssn = trimmedSS;
 
 		if (helper.isValidMonth(this.getMonth()) === false) {
 			throw new Error("Invalid month in SSN");
@@ -33,15 +33,15 @@ class SwedishSocialSecurityNumber {
 	}
 
 	getMonth() {
-		return this.#ssn.substring(2, 4); //YYMMDD-XXXX
+		return this.#ssn.substring(2, 4);
 	}
 
 	getDay() {
-		return this.#ssn.substring(4, 6); //YYMMDD-XXXX  0123456-8901
+		return this.#ssn.substring(4, 6);
 	}
 
 	getSerialNumber() {
-		return this.#ssn.substring(7, 11); //YYMMDD-XXXX
+		return this.#ssn.substring(8, 11); // Returns the last 3, not 4, digits.
 	}
 
 	getSsn() {
