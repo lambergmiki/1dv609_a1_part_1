@@ -6,7 +6,7 @@ import { SSNHelper } from "../src/correct/SSNHelper";
 // import { SSNHelper } from "../src/bugs/BuggySSNHelperWrongLength";
 
 describe("SSNHelper Tests", () => {
-	test("should return true if between 1-31", () => {
+	test("isValidDay should return true if between 1-31", () => {
 		const ssnHelper = new SSNHelper();
 		expect(ssnHelper.isValidDay("31")).toBe(true);
 	});

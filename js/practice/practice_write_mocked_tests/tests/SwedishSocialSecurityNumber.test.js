@@ -1,12 +1,12 @@
 import { jest } from "@jest/globals";
 import { SSNHelper } from "../src/correct/SSNHelper";
-import { SwedishSocialSecurityNumber } from "../src/correct/SwedishSocialSecurityNumber";
+// import { SwedishSocialSecurityNumber } from "../src/correct/SwedishSocialSecurityNumber";
 // import { SwedishSocialSecurityNumber } from "../src/bugs/BuggySwedishSocialSecurityNumberNoLenCheck";
-// import { SwedishSocialSecurityNumber } from "../src/bugs/BuggySwedishSocialSecurityNumberNoTrim";
 // import { SwedishSocialSecurityNumber } from "../src/bugs/BuggySwedishSocialSecurityNumberNoLuhn";
-// import { SwedishSocialSecurityNumber } from "../src/bugs/BuggySwedishSocialSecurityNumberWrongYear";
-// import { SwedishSocialSecurityNumber } from "../src/bugs/BuggySwedishSocialSecurityNumberWrongSsn";
+// import { SwedishSocialSecurityNumber } from "../src/bugs/BuggySwedishSocialSecurityNumberNoTrim";
 // import { SwedishSocialSecurityNumber } from "../src/bugs/BuggySwedishSocialSecurityNumberWrongMonth";
+// import { SwedishSocialSecurityNumber } from "../src/bugs/BuggySwedishSocialSecurityNumberWrongSsn";
+// import { SwedishSocialSecurityNumber } from "../src/bugs/BuggySwedishSocialSecurityNumberWrongYear";
 
 describe("SwedishSocialSecurityNumber Tests", () => {
 	let mockHelper;
@@ -42,15 +42,6 @@ describe("SwedishSocialSecurityNumber Tests", () => {
 		}).toThrow("To short, must be 11 characters");
 	});
 
-	// NumberNoTrim
-	test("Constructor should throw Error if white space affects input", () => {
-		const whitespaceSsn = "930424-7050 ";
-
-		new SwedishSocialSecurityNumber(whitespaceSsn, mockHelper);
-
-		expect(mockHelper.isCorrectLength).toHaveBeenCalledWith(validSsn);
-	});
-
 	// NumberNoLuhn
 	test("Constructor should throw Error if Luhn method is not called", () => {
 		new SwedishSocialSecurityNumber(validSsn, mockHelper);
@@ -58,20 +49,13 @@ describe("SwedishSocialSecurityNumber Tests", () => {
 		expect(mockHelper.luhnisCorrect).toHaveBeenCalledWith(validSsn);
 	});
 
-	// NumberWrongYear
-	test("getYear() should not return the first two digits of the SSN", () => {
-		const ssnMainClass = new SwedishSocialSecurityNumber(validSsn, mockHelper);
+	// NumberNoTrim
+	test("Constructor should throw Error if white space affects input", () => {
+		const whitespaceSsn = "930424-7050 ";
 
-		const year = ssnMainClass.getYear();
-		expect(year).toBe("93");
-	});
+		new SwedishSocialSecurityNumber(whitespaceSsn, mockHelper);
 
-	// NumberWrongSsn - Extra test for higher coverage
-	test("getSerialNumber should return the last 4 digits (serial number) of the SSN", () => {
-		const ssnMainClass = new SwedishSocialSecurityNumber(validSsn, mockHelper);
-
-		const serialNumber = ssnMainClass.getSerialNumber();
-		expect(serialNumber).toBe(validSsn.slice(7, 11)); // Expected output: 7050
+		expect(mockHelper.isCorrectLength).toHaveBeenCalledWith(validSsn);
 	});
 
 	// WrongMonth - Extra test for higher coverage, bug in helper class
@@ -83,5 +67,21 @@ describe("SwedishSocialSecurityNumber Tests", () => {
 		expect(() => {
 			new SwedishSocialSecurityNumber(wrongMonthSsn, mockHelper);
 		}).toThrow();
+	});
+
+	// NumberWrongSsn - Extra test for higher coverage
+	test("getSerialNumber should return the last 4 digits of the SSN", () => {
+		const ssnMainClass = new SwedishSocialSecurityNumber(validSsn, mockHelper);
+
+		const serialNumber = ssnMainClass.getSerialNumber();
+		expect(serialNumber).toBe(validSsn.slice(7, 11)); // Expected output: 7050
+	});
+
+	// NumberWrongYear
+	test("getYear() should return the first two digits of the SSN", () => {
+		const ssnMainClass = new SwedishSocialSecurityNumber(validSsn, mockHelper);
+
+		const year = ssnMainClass.getYear();
+		expect(year).toBe("93");
 	});
 });
